@@ -1,0 +1,188 @@
+#titulo {
+    margin: auto;
+    font-size: 2em;
+    color: #afd9ee;
+}
+
+.navbar {
+    background-color: #2b669a;
+}
+
+
+.btn {
+    border-radius: 3px;
+}
+
+#buscarDropdown {
+    width: 300px;
+
+}
+
+.listaDropdown:hover {
+    background-color: #adadad;
+}
+
+body{
+    background-color: rgba(43,144,255,0.4);
+}
+
+#buscar {
+    width: 350px;
+}
+
+#container-buscar {
+    display: inline-block;
+    position: inherit;
+
+}
+
+
+
+.mainWindow{
+    position: relative;
+    top: 100px;
+    height: 750px;
+    margin: auto;
+    width: 95%;
+    background-color: #eaf0ff;
+    border-radius: 15px;
+    border: 1px solid #5f69ad;
+    box-shadow: inset 1px 2px 4px 1px rgba(0, 0, 0, 0.60);;
+
+}
+
+#formularioCancion {
+    position: absolute;
+    margin: auto;
+    top: 150px;
+    left: 40%;
+    width: 500px;
+    height: 184px;
+    background-color: #dbf8ff;
+    text-align: center;
+    border-radius: 5px;
+    border: #363231 solid 2px;
+}
+
+.formulario {
+    position: relative;
+    margin: 5px;
+    text-align: justify;
+    padding: 10px;
+    top: 14px
+}
+
+#artistaBox {
+    left: 8px;
+}
+
+#enviarForm {
+    top: 5px;
+    width: 40%;
+}
+
+.btn-primary {
+    height: 50px;
+    border: 1px;
+    border-radius: 1.5px;
+}
+
+.canform {
+    border-radius: 3px;
+    border: 1px solid #afd9ee;
+    box-shadow: 1px;
+    background-color: #2b669a;
+    color: whitesmoke;
+}
+
+.canform:hover {
+    border-radius: 3px;
+    border: 1px solid #afd9ee;
+    box-shadow: 1px;
+    background-color: #65aed5;
+    color: whitesmoke;
+}
+
+#menu-buscar {
+    position: absolute;
+    top: 44px;
+    z-index: -1;
+
+}
+
+#buscador {
+    width: 300px;
+    height: 50px;
+    font-size: 1.5em;
+    background-color: #5b97d5;
+    color: white;
+    border-radius: 2px;
+    border: 1px solid #2b669a;
+
+}
+
+#buscador::placeholder{
+    color: #4175a4;
+}
+
+#ListaCanciones {
+    position: relative;
+    top: 40px;
+    margin: auto;
+
+
+}
+
+.listaH {
+    background-color: #5084c6;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    border: 2px solid #5084c6;
+    z-index: -1;
+}
+
+#listaCan {
+    width: 100%;
+    border: solid 1px inherit;
+    border-radius: 3px;
+    background-color: #b9def0;
+    box-shadow: 5px 10px 7px 0px rgba(0, 0, 0, 0.40);
+}
+
+#listaCan:nth-child(even){
+    background-color: #d5eaf0;
+}
+
+tr:hover {
+    background: #d1fcff;
+}
+
+tr {
+    border: 2px solid #5084c6;
+    border-radius:3px;
+
+}
+
+#numCan {
+    text-align: center;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    box-shadow: -1px -1px 3px;
+    font-size: 20px;
+}
+
+#enviarForm:disabled {
+    background-color: rgba(59,140,141,0.31);
+}
+
+#busquedaCancionesMAIN {
+    border-radius: 5px;
+    background-color: rgba(83,138,195,0.26);
+    box-shadow: inset -1px 2px 4px rgba(0, 0, 0, 0.37);
+    position: relative;
+    margin-top: 50px;
+}
