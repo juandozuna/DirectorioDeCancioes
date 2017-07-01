@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b66eaab5-6654-402f-9ffc-5b6c6bc341c1" name="Default" comment="" />
+    <list default="true" id="b66eaab5-6654-402f-9ffc-5b6c6bc341c1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/script.js" afterPath="$PROJECT_DIR$/js/script.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -18,8 +21,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="61" column="34" lean-forward="true" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
+            <state relative-caret-position="666">
+              <caret line="74" column="18" lean-forward="true" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -28,15 +31,15 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="49" column="64" lean-forward="true" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
+            <state relative-caret-position="49">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
-                <marker date="1498885772000" expanded="true" signature="10065:10076" ph="..." />
-                <marker date="1498885772000" expanded="true" signature="15829:15847" ph="..." />
-                <marker date="1498885772000" expanded="true" signature="15867:15875" ph="↶" />
-                <marker date="1498885772000" expanded="true" signature="15889:15896" ph="⟹" />
-                <marker date="1498885772000" expanded="true" signature="17748:17766" ph="..." />
-                <marker date="1498885772000" expanded="true" signature="17777:17784" ph="⟹" />
+                <marker date="1498909356000" expanded="true" signature="10067:10078" ph="..." />
+                <marker date="1498909356000" expanded="true" signature="15831:15849" ph="..." />
+                <marker date="1498909356000" expanded="true" signature="15869:15877" ph="↶" />
+                <marker date="1498909356000" expanded="true" signature="15891:15898" ph="⟹" />
+                <marker date="1498909356000" expanded="true" signature="17750:17768" ph="..." />
+                <marker date="1498909356000" expanded="true" signature="17779:17786" ph="⟹" />
               </folding>
             </state>
           </provider>
@@ -52,6 +55,13 @@
     <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="master" />
     <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="juandozuna" />
     <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="DirectorioDeCancioes" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/js/script.js" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -126,12 +136,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498909031952</updated>
-      <workItem from="1498909033467" duration="125000" />
+      <workItem from="1498909033467" duration="332000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125000" />
+    <option name="totallyTimeSpent" value="332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="6" />
@@ -168,23 +178,23 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="61" column="34" lean-forward="true" selection-start-line="61" selection-start-column="34" selection-end-line="61" selection-end-column="34" />
+        <state relative-caret-position="666">
+          <caret line="74" column="18" lean-forward="true" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="49" column="64" lean-forward="true" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
+        <state relative-caret-position="49">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
-            <marker date="1498885772000" expanded="true" signature="10065:10076" ph="..." />
-            <marker date="1498885772000" expanded="true" signature="15829:15847" ph="..." />
-            <marker date="1498885772000" expanded="true" signature="15867:15875" ph="↶" />
-            <marker date="1498885772000" expanded="true" signature="15889:15896" ph="⟹" />
-            <marker date="1498885772000" expanded="true" signature="17748:17766" ph="..." />
-            <marker date="1498885772000" expanded="true" signature="17777:17784" ph="⟹" />
+            <marker date="1498909356000" expanded="true" signature="10067:10078" ph="..." />
+            <marker date="1498909356000" expanded="true" signature="15831:15849" ph="..." />
+            <marker date="1498909356000" expanded="true" signature="15869:15877" ph="↶" />
+            <marker date="1498909356000" expanded="true" signature="15891:15898" ph="⟹" />
+            <marker date="1498909356000" expanded="true" signature="17750:17768" ph="..." />
+            <marker date="1498909356000" expanded="true" signature="17779:17786" ph="⟹" />
           </folding>
         </state>
       </provider>
