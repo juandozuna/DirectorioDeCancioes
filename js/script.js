@@ -398,7 +398,6 @@ function buscarArtista(art){
     var k;
     var texto1;
     var encontrado = false;
-    var resartista = 0;
     texto1= "<h2>Resultados de su busqueda</h2>";
     texto1+= "<table class='table' id='listaCan'><thead></thead>"+
         "<thead id='headerBusca'><th class='listaH'>ID</th>" +
@@ -406,10 +405,9 @@ function buscarArtista(art){
         "<th class='listaH'>ARTISTA</th>" +
         "<th class='listaH'>GÉNERO</th>" +
         "<th class='listaH'>DURACIÓN</th></thead>";
-    for(k = 0; k < contar; k++)
+    for(k = 0; k < id.length; k++)
     {
-        resartista = artista[k].search(art);
-        if(resartista > -1)
+        if(artista[k].toLowerCase() === art.toLowerCase())
         {
             texto1+="<tr id='can"+(1000+k)+"' class='filaCancion'><td>" + id[k] + "</td>" +
                 "<td>"+titulo[k]+"</td>" +
@@ -441,7 +439,6 @@ function buscarCancion(can)
     $('#buscador').val('');
     $('#buscador').hide('fast');
     var tit = can.toLowerCase();
-    var rescancion = 0;
     var texto1;
     texto1= "<h2>Resultados de su busqueda</h2>";
     texto1 +="<table class='table' id='listaCan'><thead></thead>"+
@@ -452,9 +449,8 @@ function buscarCancion(can)
         "<th class='listaH'>DURACIÓN</th></thead>";
 
 
-    for(var i=0;i<contar;i++){
-        rescancion = titulo[i].search(tit));
-        if (rescancion > -1) {
+    for(var i=0;i<id.length;i++){
+        if (titulo[i].toLowerCase() === tit ) {
             texto1 += "<tr class='filaCancion'><td>" + id[i] + "</td>" + //INtento de hacer algo asombroso
                 "<td>" + titulo[i] + "</td>" +
                 "<td>" + artista[i] + "</td>" +
@@ -574,13 +570,13 @@ function verListaCL(x){
         if(t === idL[i]){
             for (var k=0; k < lista[i].length; k++){
                 var l = 0;
-                for (l ; l < contar; l++) if(id[l] === lista[i][k]) break;
-                if(titulo[l-1] != undefined) {
-                    texto1 += "<tr><td>" + id[l - 1] + "</td>" +
-                        "<td>" + titulo[l - 1] + "</td>" +
-                        "<td>" + artista[l - 1] + "</td>" +
-                        "<td>" + genero[l - 1] + "</td>" +
-                        "<td>" + tiempo[l - 1] + "</td></tr>";
+                for (l ; l < id.length; l++) if(id[l] === lista[i][k]) break;
+                if(titulo[l] != undefined) {
+                    texto1 += "<tr><td>" + id[l] + "</td>" +
+                        "<td>" + titulo[l] + "</td>" +
+                        "<td>" + artista[l] + "</td>" +
+                        "<td>" + genero[l] + "</td>" +
+                        "<td>" + tiempo[l] + "</td></tr>";
                 }
             }
             validar = false;
@@ -627,11 +623,11 @@ function verLista(x){
                 var l = 0;
                 for (l ; l < contar; l++) if(id[l] === lista[i][k]) break;
                 if(titulo[l-1] != undefined) {
-                    texto1 += "<tr><td>" + id[l - 1] + "</td>" +
-                        "<td>" + titulo[l - 1] + "</td>" +
-                        "<td>" + artista[l - 1] + "</td>" +
-                        "<td>" + genero[l - 1] + "</td>" +
-                        "<td>" + tiempo[l - 1] + "</td></tr>";
+                    texto1 += "<tr><td>" + id[l] + "</td>" +
+                        "<td>" + titulo[l] + "</td>" +
+                        "<td>" + artista[l] + "</td>" +
+                        "<td>" + genero[l] + "</td>" +
+                        "<td>" + tiempo[l] + "</td></tr>";
                 }
             }
             validar = false;
@@ -673,7 +669,7 @@ function cancionLista(x){ // La X es el ID de la lista en la que se agrega la ca
     if(validar) {
         alert("No existe esa lista");
     }else{
-        alert("Se guardo la canciones exitosamente");
+
         det_cancion_guardar();
     }
 
@@ -689,7 +685,7 @@ function agregarAPlaylist(x){ //Aqui X es el ID de la cancion a ser agregada
         if (list === idL[i]){
             for (var k = 0; k < contar; k++){
                 if(idCan === id[k]){
-                    lista[i].push(idCan + 1);
+                    lista[i].push(idCan);
                     validar = false;
                     break;
                 } else {
