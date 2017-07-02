@@ -70,8 +70,9 @@ $(document).ready(function(){
         if(e.which === 13){
             var idModificar = parseInt($('#modificarCancion').val());
             var validar;
-            for (var i = 0; i<contar; i++){
-                if(parseInt(id[i]) === idModificar ){
+            var i;
+            for (i = 0; i < id.length; i++){
+                if(parseInt(id[i]) === idModificar){
                     $('#tituloCancion').removeAttr("disabled").show();
                     $('#artistaCancion').removeAttr("disabled").show();
                     $('#generoCancion').removeAttr("disabled").show();
@@ -98,17 +99,12 @@ $(document).ready(function(){
     });
 
     $('#modificarForm').click(function(){
-        var idMod = $('#modificarCancion').val();
+        var idMod = parseInt($('#modificarCancion').val());
        ModificarCanciones(idMod);
        $('#modificarCancion').val('');
        $('#modalFormCanciones').modal('toggle');
         det_cancion_guardar2();
     });
-
-    $('#ListaCanciones').hover(function(){
-        $('#busquedaCancionesMAIN').hide('fast')
-    });
-
 
     $('#buscar-titulo').click(function(){
         $('#buscador').attr("placeholder", "Buscar por Título");
@@ -194,6 +190,10 @@ $(document).ready(function(){
 
     });
 
+    $('.elementoCanciones').draggable({
+
+        revert: true, helper: "clone"
+    });
 
 });
 
@@ -204,6 +204,7 @@ function eliminarCancion(idUI){
     * y solo habia una en el arreglo
     * Esta no se elminaba. Ahora ese problema está corregido
     * */
+    idUI = parseInt(idUI);
     var n, k;
     var validar = false;
     for(n=0;n<id.length;n++){
@@ -216,7 +217,7 @@ function eliminarCancion(idUI){
             validar = true;
             break;f
         }else{
-        if(id[n] === idUI) {
+        if(parseInt(id[n]) === idUI) {
             id.splice(n, 1);
             titulo.splice(n, 1);
             artista.splice(n, 1);
@@ -231,6 +232,8 @@ function eliminarCancion(idUI){
     if(validar) {
         det_cancion_guardar();
         ListaCanciones();
+    }else{
+        alert("El id que introdujo no existe");
     }
     $('#borrarCancion').val("");
 }
@@ -317,7 +320,7 @@ function ListaCanciones(){
         "<th class='listaH'>DURACION</th></thead>";
     for(i=0;i<titulo.length;i++) {
         if (titulo[i]!= undefined){
-            text += "<tr id='can"+ id[i] +"' class='filaCancion'><td>" + id[i] + "</td>" +
+            text += "<tr id='can"+ id[i] +"' class='filaCancion elementoCanciones'><td class=''>" + id[i] + "</td>" + //La cla
                 "<td>"+titulo[i]+ "</td>" +
                 "<td>"+artista[i]+"</td>" +
                 "<td>"+genero[i]+"</td>" +
@@ -329,12 +332,18 @@ function ListaCanciones(){
 }
 
 function ModificarCanciones(n){
-    n = parseInt(n-1000);
-    id[n] = $("#idCancion").val();
-    titulo[n] = $("#tituloCancion").val();
-    artista[n] = $("#artistaCancion").val();
-    genero[n] = $("#generoCancion").val();
-    tiempo[n] = $("#tiempoCancion").val();
+
+    for(var i = 0; i < id.length; i++) {
+
+        if(id[i] === n) {
+            id[i] = $("#idCancion").val();
+            titulo[i] = $("#tituloCancion").val();
+            artista[i] = $("#artistaCancion").val();
+            genero[i] = $("#generoCancion").val();
+            tiempo[i] = $("#tiempoCancion").val();
+            break;
+        }
+    }
     ListaCanciones();
 }
 
@@ -444,7 +453,7 @@ function buscarCancion(can)
 
 
     for(var i=0;i<contar;i++){
-        rescancion = titulo[i].search(tit);
+        rescancion = titulo[i].search(tit));
         if (rescancion > -1) {
             texto1 += "<tr class='filaCancion'><td>" + id[i] + "</td>" + //INtento de hacer algo asombroso
                 "<td>" + titulo[i] + "</td>" +
@@ -457,7 +466,7 @@ function buscarCancion(can)
 
     texto1 +="</table>";
     $('#busquedaCancionesMAIN').html(texto1);
-    $('#busquedaCancionesMAIN').show('fold', 800);
+    $('#busquedaCancionesMAIN').show('fold');
 
 }
 
@@ -524,14 +533,20 @@ function borrarLista(){
     $('#input-main').val('');
     value = value.toUpperCase();
 
-
     for(var i = 0; i < contarList; i++){
-        if(idL[i] === value){
-            idL.splice(i,1);
-            lista.splice(i,1);
-            nombreList.splice(i,1);
+        if(id.length === 1){
+            idL = [];
+            lista = [];
+            nombreList = [];
             break;
-        } else continue;
+        }else {
+            if (idL[i] === value) {
+                idL.splice(i, 1);
+                lista.splice(i, 1);
+                nombreList.splice(i, 1);
+                break;
+            } else continue;
+        }
     }
     det_cancion_guardar();
 }
@@ -549,7 +564,7 @@ function verListaCL(x){
         "<th class='listaH'>DURACIÓN</th></thead>";
 
     for(var i = 0; i < lista.length; i++){
-        texto1= "<h2 style='text-align: center'> <a id='BackList'>&cularr;</a> PLAYLIST &xrArr; "+nombreList[i]+"</h2>";
+        texto1= "<h2 style='text-align: center' id='Lista"+nombreList[i]+"'> <a id='BackList'>&cularr;</a> PLAYLIST &xrArr; "+nombreList[i]+"</h2>";
         texto1 +="<table class='table' id='listaCan'><thead></thead>"+
             "<thead><th class='listaH'>ID</th>" +
             "<th class='listaH'>TITULO</th>" +
@@ -600,7 +615,7 @@ function verLista(x){
         "<th class='listaH'>DURACIÓN</th></thead>";
 
     for(var i = 0; i < lista.length; i++){
-        texto1= "<h2 style='text-align: center'>PLAYLIST &xrArr; "+nombreList[i]+"</h2>";
+        texto1= "<h2 style='text-align: center' id='Lista"+nombreList[i]+"'> <a id='BackList'>&cularr;</a> PLAYLIST &xrArr; "+nombreList[i]+"</h2>";
         texto1 +="<table class='table' id='listaCan'><thead></thead>"+
             "<thead><th class='listaH'>ID</th>" +
             "<th class='listaH'>TITULO</th>" +
@@ -658,6 +673,7 @@ function cancionLista(x){ // La X es el ID de la lista en la que se agrega la ca
     if(validar) {
         alert("No existe esa lista");
     }else{
+        alert("Se guardo la canciones exitosamente");
         det_cancion_guardar();
     }
 
@@ -694,6 +710,7 @@ function agregarAPlaylist(x){ //Aqui X es el ID de la cancion a ser agregada
         $('#agregar-otra-playlist').show('fast');
         $('#cancion-a-lista').val('');
         $('.cancionForm').attr('disabled', 'disabled');
+        alert("La cancion se guardo exitosamente");
         det_cancion_guardar();
     }
 }
