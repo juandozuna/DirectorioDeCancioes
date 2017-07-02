@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-   //datos_localstorage();
+    datos_localstorage();
 
 
 
@@ -198,19 +198,35 @@ $(document).ready(function(){
 });
 
 function eliminarCancion(idUI){
+    /*
+    * Aqui agregue un if mas al bucle, porque
+    * cuando uno le daba a eliminar cancion
+    * y solo habia una en el arreglo
+    * Esta no se elminaba. Ahora ese problema está corregido
+    * */
     var n, k;
     var validar = false;
-    var idU = parseInt(idUI);
     for(n=0;n<id.length;n++){
-        if(id[n]=== idU){
-            id.splice(n,1);
-            titulo.splice(n,1);
-            artista.splice(n,1);
-            genero.splice(n,1);
-            tiempo.splice(n,1);
+        if(id.length === 1){
+            id = [];
+            titulo = [];
+            artista = [];
+            genero = [];
+            tiempo  =[]
+            validar = true;
+            break;f
+        }else{
+        if(id[n] === idUI) {
+            id.splice(n, 1);
+            titulo.splice(n, 1);
+            artista.splice(n, 1);
+            genero.splice(n, 1);
+            tiempo.splice(n, 1);
             validar = true;
             break;
         }else continue;
+        }
+
     }
     if(validar) {
         det_cancion_guardar();
@@ -323,6 +339,7 @@ function ModificarCanciones(n){
 }
 
 function BuscarCancion(elemento){
+    elemento = elemento.toLowerCase();
     if(placeholderBuscar === "Buscar por ID") BuscarID(elemento);
     else if(placeholderBuscar === "Buscar por Artísta") buscarArtista(elemento);
     else if(placeholderBuscar === "Buscar por Título") buscarCancion(elemento);
@@ -331,7 +348,6 @@ function BuscarCancion(elemento){
 function BuscarID(ID){
     $('#buscador').val('');
     $('#buscador').hide('fast');
-    ID = parseInt(ID);
     var k;
     var texto1;
     var encontrado = false;
@@ -373,6 +389,7 @@ function buscarArtista(art){
     var k;
     var texto1;
     var encontrado = false;
+    var resartista = 0;
     texto1= "<h2>Resultados de su busqueda</h2>";
     texto1+= "<table class='table' id='listaCan'><thead></thead>"+
         "<thead id='headerBusca'><th class='listaH'>ID</th>" +
@@ -382,7 +399,8 @@ function buscarArtista(art){
         "<th class='listaH'>DURACIÓN</th></thead>";
     for(k = 0; k < contar; k++)
     {
-        if(artista[k]===art)
+        resartista = artista[k].search(art);
+        if(resartista > -1)
         {
             texto1+="<tr id='can"+(1000+k)+"' class='filaCancion'><td>" + id[k] + "</td>" +
                 "<td>"+titulo[k]+"</td>" +
@@ -413,7 +431,7 @@ function buscarCancion(can)
 {
     $('#buscador').val('');
     $('#buscador').hide('fast');
-    var tit = can;
+    var tit = can.toLowerCase();
     var rescancion = 0;
     var texto1;
     texto1= "<h2>Resultados de su busqueda</h2>";
@@ -617,6 +635,7 @@ function verLista(x){
 
 }
 
+//agrega una cancion a la lista
 function cancionLista(x){ // La X es el ID de la lista en la que se agrega la canción
     var validar = true;
     var value = $('#cancion-a-lista').val();
