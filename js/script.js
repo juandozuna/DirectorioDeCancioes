@@ -195,6 +195,9 @@ $(document).ready(function(){
         revert: true, helper: "clone"
     });
 
+    $('#exportXML').click(function(){
+        exportToXml();
+    });
 });
 
 function eliminarCancion(idUI){
@@ -434,8 +437,7 @@ function buscarArtista(art){
 
 }
 
-function buscarCancion(can)
-{
+function buscarCancion(can){
     $('#buscador').val('');
     $('#buscador').hide('fast');
     var tit = can.toLowerCase();
@@ -481,8 +483,6 @@ function listaEjemplo(){
     contarList++;
     det_cancion_guardar();
 }
-
-
 //despliega una listado de listas de canciones
 function mostrarListas(){
     var text = "<h2>Listas</h2>";
@@ -674,7 +674,6 @@ function cancionLista(x){ // La X es el ID de la lista en la que se agrega la ca
     }
 
 }
-
 function agregarAPlaylist(x){ //Aqui X es el ID de la cancion a ser agregada
     validar = true;
     var list = $('#idLista').val();
@@ -711,8 +710,7 @@ function agregarAPlaylist(x){ //Aqui X es el ID de la cancion a ser agregada
     }
 }
 
-
-
+//Aqui están los métodos que guardan las canciones y actualizan los datos
 function det_cancion_guardar(){
     localStorage["idCanciones"] = JSON.stringify(id);
     localStorage["tituloCanciones"] = JSON.stringify(titulo);
@@ -734,8 +732,7 @@ function det_cancion_guardar2(){
     localStorage["idListas"] = JSON.stringify(idL);
     localStorage["nombreListas"]=JSON.stringify(nombreList);
     localStorage["listas"]= JSON.stringify(lista);
-}
-
+} //Este metodo guarda las canciones sin actualizar el contador, este se utiliza cuando en los metodos de modificacion.
 function datos_localstorage(){
     id = JSON.parse(localStorage["idCanciones"]);
     titulo = JSON.parse(localStorage["tituloCanciones"]);
@@ -749,3 +746,59 @@ function datos_localstorage(){
     lista = JSON.parse(localStorage["listas"]);
 
 }
+
+//Aqui comienza el método de exportacion a XML
+function exportToXml(){
+    var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
+        '<libreriaCanciones>' +
+        '<canciones>';
+
+    var i;
+    for(i = 0; i < id.length; i++){
+        xml += '<cancion>' +
+            '<id>'+id[i]+'</id>' +
+            '<nombre>'+titulo[i]+'</nombre>' +
+            '<artista>'+artista[i]+'</artista>' +
+            '<duracion>'+tiempo[i]+'</duracion>' +
+            '<genero>'+genero[i]+'</genero></cancion>';
+    }
+    xml += '</canciones>' +
+        "<listasCanciones>";
+    var j;
+    for(i=0; i < idL.length; i++){
+        xml += "<listaCanciones>" +
+            "<id>"+idL[i]+"</id>" +
+            "<nombre>"+nombreList[i]+"</nombre>" +
+            "<canciones>";
+        for(j = 0; j < lista[i].length; j++){
+            xml += "<id>"+lista[i][j]+"</id>"
+        }
+        xml += "</canciones></listaCanciones>";
+    }
+    xml += "</listasCanciones>" +
+        "</libreriaCanciones>";
+
+
+    //document.open('data:text/xml,charset=utf-8' + encodeURIComponent(myCsv));
+    //window.open('data:Application/octet-stream;charset=utf-8,' + encodeURIComponent(xml));
+    download("libreriaCanciones.xml",xml);
+
+}
+
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+} //Esta función se puede usar para descargar todo
+
+
+
+
