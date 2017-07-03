@@ -785,6 +785,11 @@ function exportToXml(){
 
 }
 
+//Metodo de importacion XML
+function importXML(){
+    
+}
+
 
 function download(filename, text) {
     var element = document.createElement('a');
