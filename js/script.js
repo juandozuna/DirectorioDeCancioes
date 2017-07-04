@@ -24,7 +24,6 @@ $(document).ready(function(){
     datos_localstorage();
 
 
-
     //CancionesEjemplo();
     //listaEjemplo();
     /*if(titulo[0] != undefined) */
@@ -197,6 +196,27 @@ $(document).ready(function(){
 
     $('#exportXML').click(function(){
         exportToXml();
+    });
+
+   $("#importXML").click(function() {
+        // creating input on-the-fly
+        var input = $(document.createElement("input"));
+        input.attr("type", "file");
+        // add onchange handler if you wish to get the file :)
+        input.change(function(){
+            //if(!isXML(input.val())){
+                //alert("Debe de subir un archivo XML válido");
+            //}else {
+                var fr = new FileReader();
+                fr.onload = function () {
+                    alert('START');
+                    importXML(this.result);
+                }
+                fr.readAsText(this.files[0]);
+           // }
+        });
+        input.trigger("click"); // opening dialog
+        return false; // avoiding navigation
     });
 });
 
@@ -786,9 +806,35 @@ function exportToXml(){
 }
 
 //Metodo de importacion XML
-function importXML(){
-    
+function importXML(xml){
+    var xmlDoc = $.parseXML(xml),
+        $xml = $(xmlDoc),
+        $canciones = xmlDoc.getElementsByTagName('cancion');
+        var i, t;
+        for(i = 0; i < $canciones.length; i++){
+            id.push(1000 + contar);
+            if($canciones[i].childNodes[1].childNodes[0] != undefined)
+            titulo.push($canciones[i].childNodes[1].childNodes[0].nodeValue); else titulo.push("");
+            if($canciones[i].childNodes[2].childNodes[0] != undefined)
+            artista.push($canciones[i].childNodes[2].childNodes[0].nodeValue); else artista.push("");
+            if($canciones[i].childNodes[3].childNodes[0] != undefined)
+                tiempo.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else tiempo.push("");
+            if($canciones[i].childNodes[4].childNodes[0] != undefined)
+                genero.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else genero.push("");
+
+            contar++;
+
+        }
+        ListaCanciones();
+        det_cancion_guardar();
+
+
+
+
 }
+
+
+
 
 
 function download(filename, text) {
@@ -805,5 +851,18 @@ function download(filename, text) {
 } //Esta función se puede usar para descargar todo
 
 
-
+//metodo retorna el tipo de archivo
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+}
+//Esta función retorna verdadero si el archivo es de extensión XML
+function isXML(filename){
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()){
+        case 'xml':
+            return true;
+    }
+    return false;
+}
 
