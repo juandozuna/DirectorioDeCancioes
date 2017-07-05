@@ -889,7 +889,7 @@ function importXML(xml) {
     for (i = 0; i < $canciones.length; i++) {
         var inList = 0;
         for (var j = 0; j < $listaCanciones.length; j++) {
-            for (var k = 0; k < $listaCanciones[j].childNodes[2].childNodes[0].childNodes[0].length; k++) {
+            for (var k = 0; k < $listaCanciones[j].childNodes[2].childNodes[0].length; k++) {
               if($listaCanciones[j].childNodes[2].childNodes[k].childNodes[0].nodeValue === $canciones[i].childNodes[0].childNodes[0].nodeValue);
                 {
                     inList = 1000+contar;
@@ -917,12 +917,6 @@ function importXML(xml) {
         det_cancion_guardar();
     }
 }
-
-
-
-
-
-
 
 function download(filename, text) {
     var element = document.createElement('a');
