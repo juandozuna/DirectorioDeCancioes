@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-    datos_localstorage();
+    //datos_localstorage();
 
 
     //CancionesEjemplo();
@@ -217,7 +217,6 @@ $(document).ready(function(){
             //}else {
                 var fr = new FileReader();
                 fr.onload = function () {
-                    alert('START');
                     importXML(this.result);
                 }
                 fr.readAsText(this.files[0]);
@@ -872,32 +871,54 @@ function exportToJSON() {
 }
 
 //Metodo de importacion XML
-function importXML(xml){
+function importXML(xml) {
     var xmlDoc = $.parseXML(xml),
         $xml = $(xmlDoc),
-        $canciones = xmlDoc.getElementsByTagName('cancion');
-        var i, t;
-        for(i = 0; i < $canciones.length; i++){
-            id.push(1000 + contar);
-            if($canciones[i].childNodes[1].childNodes[0] != undefined)
-            titulo.push($canciones[i].childNodes[1].childNodes[0].nodeValue); else titulo.push("");
-            if($canciones[i].childNodes[2].childNodes[0] != undefined)
-            artista.push($canciones[i].childNodes[2].childNodes[0].nodeValue); else artista.push("");
-            if($canciones[i].childNodes[3].childNodes[0] != undefined)
-                tiempo.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else tiempo.push("");
-            if($canciones[i].childNodes[4].childNodes[0] != undefined)
-                genero.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else genero.push("");
+        $canciones = $xml.find('cancion'),
+        $listaCanciones = $xml.find('listaCanciones');
 
-            contar++;
 
+    var i;
+    alert($listaCanciones[0].childNodes[2].childNodes[0].childNodes[0].nodeValue);
+    for (i = 0; i < $listaCanciones.length; i++){
+        idL.push("P"+contarList);
+        nombreList.push($listaCanciones[i].childNodes[1].childNodes[0].nodeValue);
+        lista.push(new Array());
+        contarList++;
+    }
+    for (i = 0; i < $canciones.length; i++) {
+        var inList = 0;
+        for (var j = 0; j < $listaCanciones.length; j++) {
+            for (var k = 0; k < $listaCanciones[j].childNodes[2].childNodes[0].childNodes[0].length; k++) {
+              if($listaCanciones[j].childNodes[2].childNodes[k].childNodes[0].nodeValue === $canciones[i].childNodes[0].childNodes[0].nodeValue);
+                {
+                    inList = 1000+contar;
+                    for(var p = 0; p < nombreList.length; p++){
+                        if(nombreList[p] === $listaCanciones[j].childNodes[1].childNodes[0].nodeValue)
+                        {lista[p].push(inList); break;}
+                    }
+
+                }
+
+            }
         }
+
+        id.push(1000 + contar);
+        if ($canciones[i].childNodes[1].childNodes[0] != undefined)
+        titulo.push($canciones[i].childNodes[1].childNodes[0].nodeValue); else titulo.push("");
+        if ($canciones[i].childNodes[2].childNodes[0] != undefined)
+        artista.push($canciones[i].childNodes[2].childNodes[0].nodeValue); else artista.push("");
+        if ($canciones[i].childNodes[3].childNodes[0] != undefined)
+            tiempo.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else tiempo.push("");
+        if ($canciones[i].childNodes[4].childNodes[0] != undefined)
+            genero.push($canciones[i].childNodes[4].childNodes[0].nodeValue); else genero.push("");
+        contar++;
         ListaCanciones();
         det_cancion_guardar();
-
-
-
-
+    }
 }
+
+
 
 
 
