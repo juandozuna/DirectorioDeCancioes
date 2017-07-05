@@ -168,6 +168,7 @@ $(document).ready(function(){
 
     $('#btnLoadJSON').click(function(){
         importJSON();
+        det_cancion_guardar();
     });
 
     $('#verLista-form').keydown(function(e){
@@ -225,6 +226,25 @@ $(document).ready(function(){
         input.trigger("click"); // opening dialog
         return false; // avoiding navigation
     });
+
+   $(function(){
+       var doc = new jsPDF('p', 'mm', [1000, 300]);
+       doc.setFontSize(12);
+       var specialElementHandlers = {
+           '#PDFgenerator': function (element, renderer) {
+               return true;
+           }
+       };
+
+       $('#exportPDF').click(function () {
+           PDFexportDIVFIll();
+           doc.fromHTML($('#PDFGenerator').html(), 25, 25, {
+               'width': 200,
+               'elementHandlers': specialElementHandlers
+           });
+           doc.save('Directorio de Canciones.pdf');
+       });
+   });
 });
 
 
@@ -947,8 +967,6 @@ function isXML(filename){
     return false;
 }
 
-
-
     function importJSON() {
         var input, file, fr;
 
@@ -1013,10 +1031,58 @@ function isXML(filename){
                 }
                 i++;
             }
+            det_cancion_guardar();
             ListaCanciones();
             mostrarListas();
-            //det_cancion_guardar();
+
         }
     }
+
+    function PDFexportDIVFIll(){
+        var text = "<h1>Directorio de Canciones</h1>" +
+            "<h3>CANCIONES</h3>";
+        text +="<table>"+
+            "<th>ID</th>" +
+            "<th>TITULO</th>" +
+            "<th>ARTISTA</th>" +
+            "<th>GÉNERO</th>" +
+            "<th>DURACIÓN</th>";
+        for(i=0;i<titulo.length;i++) {
+            if (titulo[i]!= undefined){
+                text += "<tr><td>" + id[i] + "</td>" + //La cla
+                    "<td>"+titulo[i]+ "</td>" +
+                    "<td>"+artista[i]+"</td>" +
+                    "<td>"+genero[i]+"</td>" +
+                    "<td>"+tiempo[i]+"</td></tr>";
+            }
+        }
+        text += "</table><h2>Listas</h2>";
+        var text1 = "";
+        for(var i = 0; i < lista.length; i++){
+            text1 += "<h3> "+nombreList[i]+"</h3>";
+            text1 +="<table>"+
+                "<th>ID</th>" +
+                "<th>TITULO</th>" +
+                "<th>ARTISTA</th>" +
+                "<th>GÉNERO</th>" +
+                "<th>DURACIÓN</th>";
+                for (var k=0; k < lista[i].length; k++){
+                    var l = 0;
+                    for (l ; l < id.length; l++)
+                        if(id[l] === lista[i][k]) break;
+                        text1 += "<tr><td>" + id[l] + "</td>" +
+                            "<td>" + titulo[l] + "</td>" +
+                            "<td>" + artista[l] + "</td>" +
+                            "<td>" + genero[l] + "</td>" +
+                            "<td>" + tiempo[l] + "</td></tr>";
+                    }
+                text1 += "</table><br>";
+                }
+
+
+        $('#PDFGenerator').html(text  +text1);
+    }
+
+
 
 
