@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-    //datos_localstorage();
+    datos_localstorage();
 
 
     //CancionesEjemplo();
@@ -879,27 +879,27 @@ function importXML(xml) {
 
 
     var i;
-    alert($listaCanciones[0].childNodes[2].childNodes[0].childNodes[0].nodeValue);
+    var createdLists = [];
     for (i = 0; i < $listaCanciones.length; i++){
-        idL.push("P"+contarList);
+        idL.push("X"+contarList);
         nombreList.push($listaCanciones[i].childNodes[1].childNodes[0].nodeValue);
         lista.push(new Array());
+        createdLists.push(idL.length-1);
         contarList++;
     }
+    var p;
     for (i = 0; i < $canciones.length; i++) {
-        var inList = 0;
-        for (var j = 0; j < $listaCanciones.length; j++) {
-            for (var k = 0; k < $listaCanciones[j].childNodes[2].childNodes[0].length; k++) {
-              if($listaCanciones[j].childNodes[2].childNodes[k].childNodes[0].nodeValue === $canciones[i].childNodes[0].childNodes[0].nodeValue);
-                {
-                    inList = 1000+contar;
-                    for(var p = 0; p < nombreList.length; p++){
-                        if(nombreList[p] === $listaCanciones[j].childNodes[1].childNodes[0].nodeValue)
-                        {lista[p].push(inList); break;}
+        for(var j = 0;j < $listaCanciones.length; j++){
+            for(p = 0; p < lista.length; p++){
+                if($listaCanciones[j].childNodes[1].childNodes[0].nodeValue === nombreList[p]){
+                    for(var k = 0; k < $listaCanciones[0].childNodes[2].childElementCount; k++) {
+                        if ($canciones[i].childNodes[0].childNodes[0].nodeValue === $listaCanciones[0].childNodes[2].childNodes[k].childNodes[0].nodeValue){
+                            lista[p].push(1000 + contar);
+                            break;
+                        }
                     }
-
+                    break;
                 }
-
             }
         }
 
