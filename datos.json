@@ -1,0 +1,85 @@
+{
+
+
+
+
+  "canciones": [
+    {
+      "id": 190213,
+      "nombre": "Rolling in the Deep",
+      "artista": "Adele",
+      "duracion": "4min",
+      "genero": "Pop"
+
+    },
+    {
+      "id": "23423",
+      "nombre": "Me Rehuso",
+      "artista": "Danny Ocean",
+      "duracion": "4min",
+      "genero": "Reggaeton"
+
+    },
+    {
+      "id": "53452",
+      "nombre": "No Vacancy",
+      "artista": "One Republic",
+      "duracion": "3:43",
+      "genero": "Electronic"
+
+    }
+
+  ],
+  "listaCanciones": [
+    {
+      "id": 190213,
+      "nombre": "Lista1",
+      "canciones": [
+        {
+          "id": 190213,
+          "nombre": "Rolling in the Deep",
+          "artista": "Adele",
+          "duracion": "4min",
+          "genero": "Pop"
+        },
+
+        {
+          "id": "23423",
+          "nombre": "Me Rehuso",
+          "artista": "Danny Ocean",
+          "duracion": "4min",
+          "genero": "Reggaeton"
+        }
+      ]
+    },
+
+     {
+      "id": 190213,
+      "nombre": "Lista2",
+      "canciones": [
+        {
+          "id": 190213,
+          "nombre": "Rolling in the Deep",
+          "artista": "Adele",
+          "duracion": "4min",
+          "genero": "Pop"
+        },
+
+        {
+          "id": "53452",
+          "nombre": "No Vacancy",
+          "artista": "One Republic",
+          "duracion": "3:43",
+          "genero": "Electronic"
+        }
+      ]
+    }
+
+  ]
+
+
+
+
+
+ 
+}

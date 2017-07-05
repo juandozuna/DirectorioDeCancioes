@@ -162,6 +162,14 @@ $(document).ready(function(){
         mostrarListas();
     }); //MOstrar lista está listo
 
+    $('#exportJSON').click(function(){
+        exportToJSON();
+    });
+
+    $('#btnLoadJSON').click(function(){
+        importJSON();
+    });
+
     $('#verLista-form').keydown(function(e){
         if(e.which === 13){
             var value =  $(this).val();
@@ -219,6 +227,9 @@ $(document).ready(function(){
         return false; // avoiding navigation
     });
 });
+
+
+
 
 function eliminarCancion(idUI){
     /*
@@ -769,6 +780,7 @@ function datos_localstorage(){
 
 //Aqui comienza el método de exportacion a XML
 function exportToXml(){
+
     var xml = '<?xml version="1.0" encoding="UTF-8"?>' +
         '<libreriaCanciones>' +
         '<canciones>';
@@ -802,6 +814,60 @@ function exportToXml(){
     //document.open('data:text/xml,charset=utf-8' + encodeURIComponent(myCsv));
     //window.open('data:Application/octet-stream;charset=utf-8,' + encodeURIComponent(xml));
     download("libreriaCanciones.xml",xml);
+
+}
+
+function exportToJSON() {
+
+     var Canciones = {};
+     var canciones = [];
+     var Listas = {};
+     var listas = [];
+     Canciones.canciones = canciones;
+     Canciones.listaCanciones = listas;
+
+     for (var i = 0; i < contar; i++) {
+     var cancion = {
+     "id": id[i],
+     "nombre": titulo[i],
+     "artista": artista[i],
+     "duracion": tiempo[i],
+     "genero": genero[i]
+     }
+     Canciones.canciones.push(cancion);
+     }
+
+
+     for (var i = 0; i < contarList; i++) {
+     var lista1 = {
+     "id": idL[i],
+     "nombre": nombreList[i],
+
+     }
+     canciones = [];
+     for (var k = 0; k < lista[i].length; k++) {
+     for (var l = 0; l < contar; l++) {
+     if (id[l] == lista[i][k]) {
+
+     var cancion = {
+     "id": id[l],
+     "nombre": titulo[l],
+     "artista": artista[l],
+     "duracion": tiempo[l],
+     "genero": genero[l]
+     }
+     canciones.push(cancion);
+
+     }
+     }
+     }
+     lista1.canciones = canciones;
+     Canciones.listaCanciones.push(lista1);
+     }
+
+
+     var dataJSON = JSON.stringify(Canciones);
+     download("libreriaCanciones.json", dataJSON);
 
 }
 
@@ -865,4 +931,77 @@ function isXML(filename){
     }
     return false;
 }
+
+
+
+    function importJSON() {
+        var input, file, fr;
+
+        if (typeof window.FileReader !== 'function') {
+            alert("The file API isn't supported on this browser yet.");
+            return;
+        }
+        input = document.getElementById('fileinput');
+        if (!input) {
+            alert("Um, couldn't find the fileinput element.");
+        }
+        else if (!input.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+        }
+        else if (!input.files[0]) {
+            alert("Please select a file before clicking 'Load'");
+        }
+        else {
+            file = input.files[0];
+            fr = new FileReader();
+            fr.onload = receivedText;
+            fr.readAsText(file);
+        }
+
+        function receivedText(e) {
+            lines = e.target.result;
+            var newArr = JSON.parse(lines);
+            var i = 0;
+
+
+            for (var can in newArr.canciones) {
+
+                id.push(1000 + contar);
+                titulo.push(newArr.canciones[i].nombre);
+                artista.push(newArr.canciones[i].artista);
+                tiempo.push(newArr.canciones[i].duracion);
+                genero.push(newArr.canciones[i].genero);
+                contar++;
+                i++;
+
+            }
+            i = 0;
+
+            for (var list in newArr.listaCanciones) {
+                contarList++;
+                idL.push('L' + contarList);
+                nombreList.push(newArr.listaCanciones[i].nombre);
+                lista.push(new Array());
+                var r = 0;
+                for (var can in newArr.listaCanciones[i].canciones) {
+                    for (var k = 0; k < titulo.length; k++) {
+
+                        if (newArr.listaCanciones[i].canciones[r].nombre == titulo[k]) {
+                            var idCan = parseInt(id[k]);
+                            lista[contarList - 1].push(idCan);
+
+
+                            break;
+                        }
+                    }
+                    r++;
+                }
+                i++;
+            }
+            ListaCanciones();
+            mostrarListas();
+            //det_cancion_guardar();
+        }
+    }
+
 
