@@ -1083,6 +1083,15 @@ function isXML(filename){
         $('#PDFGenerator').html(text  +text1);
     }
 
+    function CSVexportar(){
+        var DataCSV="ID, Titulo, Artista, Genero, Tiempo/n";
+        for(var i; i<id.length; i++){
+            DataCSV+= id[i]+","+titulo[i]+","+artista[i]+","+genero[i]+","+tiempo[i]+"/n";
+            download("DataCVSimport.csv", DataCSV)
+        }
+
+    }
+
 
 
 
