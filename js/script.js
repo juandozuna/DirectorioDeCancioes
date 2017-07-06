@@ -1113,7 +1113,6 @@ function saveAsXlsx(){
     Canciones.listaCanciones = listas;
 
 
-    Canciones.canciones.push(cancion);
     for (var i = 0; i < contar; i++) {
         var cancion = {
             "Id": id[i],
@@ -1166,8 +1165,8 @@ function saveAsXlsx(){
     }
 
 
-
-    alasql("SELECT * INTO XLSX('cities.xlsx',{headers:true}) FROM ? ",[Canciones.canciones]);
+    var data = [{city:"Minsk",population:100000}, {city:"Riga",population:200000}];
+    alasql("SELECT * INTO XLSX('libreriaCanciones.xlsx',{headers:true}) FROM ? ",[Canciones.canciones]);
 
 }
 
