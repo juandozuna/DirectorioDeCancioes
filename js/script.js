@@ -860,7 +860,7 @@ function exportToJSON() {
      }
 
 
-     for (var i = 0; i < contarList; i++) {
+     for (var i = 0; i < nombreList.length; i++) {
      var lista1 = {
      "id": idL[i],
      "nombre": nombreList[i],
