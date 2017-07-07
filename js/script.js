@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-    //datos_localstorage();
+    datos_localstorage();
 
 
     //CancionesEjemplo();
@@ -245,6 +245,9 @@ $(document).ready(function(){
            doc.save('Directorio de Canciones.pdf');
        });
    });
+
+   $('#exportCSV').click(function(){CSVexportar();});
+
 });
 
 
@@ -1103,81 +1106,78 @@ function isXML(filename){
         $('#PDFGenerator').html(text  +text1);
     }
 
-<<<<<<< HEAD
-    function CSVexportar(){
-        var DataCSV="ID, Titulo, Artista, Genero, Tiempo/n";
-        for(var i; i<id.length; i++){
-            DataCSV+= id[i]+","+titulo[i]+","+artista[i]+","+genero[i]+","+tiempo[i]+"/n";
-            download("DataCVSimport.csv", DataCSV)
+
+    function CSVexportar() {
+        var DataCSV = "";
+           DataCSV += "ID, Titulo, Artista, Genero, Tiempo\n";
+        for (var i = 0; i < id.length; i++) {
+            DataCSV += id[i] + "," + titulo[i] + "," + artista[i] + "," + genero[i] + "," + tiempo[i] + "\n";
         }
-
-=======
-function saveAsXlsx(){
-
-    var Canciones = {};
-    var canciones = [];
-    var Listas = {};
-    var listas = [];
-    Canciones.canciones = canciones;
-    Canciones.listaCanciones = listas;
+        download("DataCVSimport.csv", DataCSV);
 
 
-    for (var i = 0; i < contar; i++) {
-        var cancion = {
-            "Id": id[i],
-            "Nombre": titulo[i],
-            "Artista": artista[i],
-            "Duracion": tiempo[i],
-            "Genero": genero[i]
-        }
-        Canciones.canciones.push(cancion);
-    }
-    var cancion = {
-        "Id": undefined,
-        "Nombre": "",
-        "Artista": "LISTAS",
-        "Duracion": "",
-        "Genero": ""
-    }
-    Canciones.canciones.push(cancion);
+        function saveAsXlsx() {
+
+            var Canciones = {};
+            var canciones = [];
+            var Listas = {};
+            var listas = [];
+            Canciones.canciones = canciones;
+            Canciones.listaCanciones = listas;
 
 
-    for (var i = 0; i < contarList; i++) {
-        var lista1 = {
-            "Id": idL[i],
-            "Nombre": nombreList[i],
+            for (var i = 0; i < contar; i++) {
+                var cancion = {
+                    "Id": id[i],
+                    "Nombre": titulo[i],
+                    "Artista": artista[i],
+                    "Duracion": tiempo[i],
+                    "Genero": genero[i]
+                }
+                Canciones.canciones.push(cancion);
+            }
+            var cancion = {
+                "Id": undefined,
+                "Nombre": "",
+                "Artista": "LISTAS",
+                "Duracion": "",
+                "Genero": ""
+            }
+            Canciones.canciones.push(cancion);
 
 
-        }
-        Canciones.canciones.push(lista1);
-        canciones = [];
-        for (var k = 0; k < lista[i].length; k++) {
-            for (var l = 0; l < contar; l++) {
-                if (id[l] == lista[i][k]) {
-                    var cancion = {
-                        "Id": id[i],
-                        "Nombre": titulo[i],
-                        "Artista": artista[i],
-                        "Duracion": tiempo[i],
-                        "Genero": genero[i]
-                    }
-                    Canciones.canciones.push(cancion);
-
+            for (var i = 0; i < contarList; i++) {
+                var lista1 = {
+                    "Id": idL[i],
+                    "Nombre": nombreList[i],
 
 
                 }
+                Canciones.canciones.push(lista1);
+                canciones = [];
+                for (var k = 0; k < lista[i].length; k++) {
+                    for (var l = 0; l < contar; l++) {
+                        if (id[l] == lista[i][k]) {
+                            var cancion = {
+                                "Id": id[i],
+                                "Nombre": titulo[i],
+                                "Artista": artista[i],
+                                "Duracion": tiempo[i],
+                                "Genero": genero[i]
+                            }
+                            Canciones.canciones.push(cancion);
+
+
+                        }
+                    }
+                }
+
             }
+
+            var data = [{city: "Minsk", population: 100000}, {city: "Riga", population: 200000}];
+            alasql("SELECT * INTO XLSX('libreriaCanciones.xlsx',{headers:true}) FROM ? ", [Canciones.canciones]);
+
         }
-
-
-
->>>>>>> f08c8dbadf6e2af5deec88b27b741ffe67f2aac4
     }
-
-
-    var data = [{city:"Minsk",population:100000}, {city:"Riga",population:200000}];
-    alasql("SELECT * INTO XLSX('libreriaCanciones.xlsx',{headers:true}) FROM ? ",[Canciones.canciones]);
-
-}
 
 
