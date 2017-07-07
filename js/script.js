@@ -248,6 +248,7 @@ $(document).ready(function(){
 
    $('#exportCSV').click(function(){CSVexportar();});
 
+
 });
 
 
@@ -1109,14 +1110,15 @@ function isXML(filename){
 
     function CSVexportar() {
         var DataCSV = "";
-           DataCSV += "ID, Titulo, Artista, Genero, Tiempo\n";
+        DataCSV += "ID, Titulo, Artista, Genero, Tiempo\n";
         for (var i = 0; i < id.length; i++) {
             DataCSV += id[i] + "," + titulo[i] + "," + artista[i] + "," + genero[i] + "," + tiempo[i] + "\n";
         }
         download("DataCVSimport.csv", DataCSV);
 
+    }
+function saveAsXlsx() {
 
-        function saveAsXlsx() {
 
             var Canciones = {};
             var canciones = [];
@@ -1177,7 +1179,7 @@ function isXML(filename){
             var data = [{city: "Minsk", population: 100000}, {city: "Riga", population: 200000}];
             alasql("SELECT * INTO XLSX('libreriaCanciones.xlsx',{headers:true}) FROM ? ", [Canciones.canciones]);
 
-        }
+
     }
 
 
