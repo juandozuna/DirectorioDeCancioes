@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-    //datos_localstorage();
+    datos_localstorage();
 
 
     //CancionesEjemplo();
@@ -1056,7 +1056,7 @@ function isXML(filename){
                 i++;
 
             }
-            //det_cancion_guardar();
+            det_cancion_guardar();
             ListaCanciones();
             mostrarListas();
         }
