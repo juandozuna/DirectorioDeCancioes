@@ -21,7 +21,7 @@ var nombreList = [];
 var placeholderBuscar; //almacena el valor del placeholder que sirve para determinar que va a hacer el programa cuando va a buscar una canción
 
 $(document).ready(function(){
-    datos_localstorage();
+    //datos_localstorage();
 
 
     //CancionesEjemplo();
@@ -818,19 +818,19 @@ function exportToXml(){
             '<genero>'+genero[i]+'</genero></cancion>';
     }
     xml += '</canciones>' +
-        "<listasCanciones>";
+        "<listascanciones>";
     var j;
     for(i=0; i < idL.length; i++){
-        xml += "<listaCanciones>" +
+        xml += "<listacanciones>" +
             "<id>"+idL[i]+"</id>" +
             "<nombre>"+nombreList[i]+"</nombre>" +
             "<canciones>";
         for(j = 0; j < lista[i].length; j++){
             xml += "<id>"+lista[i][j]+"</id>"
         }
-        xml += "</canciones></listaCanciones>";
+        xml += "</canciones></listacanciones>";
     }
-    xml += "</listasCanciones>" +
+    xml += "</listascanciones>" +
         "</libreriaCanciones>";
 
 
@@ -847,7 +847,7 @@ function exportToJSON() {
      var Listas = {};
      var listas = [];
      Canciones.canciones = canciones;
-     Canciones.listaCanciones = listas;
+     Canciones.listacanciones = listas;
 
      for (var i = 0; i < contar; i++) {
      var cancion = {
@@ -879,7 +879,7 @@ function exportToJSON() {
      }
      }
      lista1.canciones = canciones;
-     Canciones.listaCanciones.push(lista1);
+     Canciones.listacanciones.push(lista1);
      }
 
 
@@ -893,25 +893,25 @@ function importXML(xml) {
     var xmlDoc = $.parseXML(xml),
         $xml = $(xmlDoc),
         $canciones = $xml.find('cancion'),
-        $listaCanciones = $xml.find('listaCanciones');
+        $listacanciones = $xml.find('listacanciones');
 
 
     var i;
     var createdLists = [];
-    for (i = 0; i < $listaCanciones.length; i++){
+    for (i = 0; i < $listacanciones.length; i++){
         idL.push("X"+contarList);
-        nombreList.push($listaCanciones[i].childNodes[1].childNodes[0].nodeValue);
+        nombreList.push($listacanciones[i].childNodes[1].childNodes[0].nodeValue);
         lista.push(new Array());
         createdLists.push(idL.length-1);
         contarList++;
     }
     var p;
     for (i = 0; i < $canciones.length; i++) {
-        for(var j = 0;j < $listaCanciones.length; j++){
+        for(var j = 0;j < $listacanciones.length; j++){
             for(p = 0; p < lista.length; p++){
-                if($listaCanciones[j].childNodes[1].childNodes[0].nodeValue === nombreList[p]){
-                    for(var k = 0; k < $listaCanciones[0].childNodes[2].childElementCount; k++) {
-                        if ($canciones[i].childNodes[0].childNodes[0].nodeValue === $listaCanciones[0].childNodes[2].childNodes[k].childNodes[0].nodeValue){
+                if($listacanciones[j].childNodes[1].childNodes[0].nodeValue === nombreList[p]){
+                    for(var k = 0; k < $listacanciones[0].childNodes[2].childElementCount; k++) {
+                        if ($canciones[i].childNodes[0].childNodes[0].nodeValue === $listacanciones[0].childNodes[2].childNodes[k].childNodes[0].nodeValue){
                             lista[p].push(1000 + contar);
                             break;
                         }
@@ -1022,23 +1022,23 @@ function isXML(filename){
 
             i = 0;
 
-            for (var list in newArr.listaCanciones)
+            for (var list in newArr.listacanciones)
             {
                 contarList++;
                 idL.push('L' + contarList);
-                nombreList.push(newArr.listaCanciones[i].nombre);
+                nombreList.push(newArr.listacanciones[i].nombre);
                 lista.push(new Array());
                 var r = 0;//contador e indice de ID's en la lista
 
 
-                for(var idenarreglo in newArr.listaCanciones[i].canciones)
+                for(var idenarreglo in newArr.listacanciones[i].canciones)
                 {
 
                     for(var p = 0; p < canciones.length; p++)
                     {
 
 
-                        if(canciones[p].id === newArr.listaCanciones[i].canciones[r])
+                        if(canciones[p].id === newArr.listacanciones[i].canciones[r])
                         {
                             for(var k = 0; k < titulo.length; k++)
                             {
@@ -1125,7 +1125,7 @@ function saveAsXlsx() {
             var Listas = {};
             var listas = [];
             Canciones.canciones = canciones;
-            Canciones.listaCanciones = listas;
+            Canciones.listacanciones = listas;
 
 
             for (var i = 0; i < contar; i++) {
